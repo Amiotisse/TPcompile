@@ -61,8 +61,11 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+// for eclipse IDE
 .project
 .classpath
 .settings
 .settings/*
+// for InteliJi IDE
+.idea/*
 
