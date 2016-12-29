@@ -1,4 +1,4 @@
-package dev.tpcompile.l3;
+package dev.tpcompile.l3.lexic;
 
 public class Token {
 	private TokenType type ;

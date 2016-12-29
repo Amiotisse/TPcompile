@@ -1,4 +1,4 @@
-package dev.tpcompile.l3;
+package dev.tpcompile.l3.lexic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,24 +38,11 @@ public class Line {
 				// System.out.println(" ---> "+ t);
 				TokenList.add(t);// ajouter un token a la liste tokenliste
 			}
-			for (int i = 0; i < TokenList.size(); i++) {
-				if (TokenList.get(i).getType() == TokenType.CONST) {
-
-					if (TokenList.get(i + 1).getValue().equals("(")) {
-						TokenList.get(i).setType(TokenType.IDENTPREDICAT);
-					}
-				}
-			}
 		}
 	}
 
 	public String afficheErr() {
 		String err = "";
-		// ne commance pas par un predicat
-		if (TokenList.size() > 0
-				&& TokenList.get(0).getType() != TokenType.IDENTPREDICAT) {
-			err += " \n la ligne dois commencer pas un identifiant de prédicat !";
-		}
 		// ne se termine pas par un point (.)
 		if (TokenList.size() > 0
 				&& !TokenList.get(TokenList.size() - 1).getValue().equals(".")) {
@@ -95,5 +82,9 @@ public class Line {
 		else
 			result+= eror+ '\n';
 		return result;
+	}
+
+	public List<Token> getTokenList() {
+		return TokenList;
 	}
 }

@@ -1,6 +1,8 @@
 package dev.tpcompile.l3;
 
 
+import dev.tpcompile.l3.lexic.Line;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -19,17 +21,14 @@ public class Main {
     		Scanner clavier = new Scanner (System.in);
     		choix = clavier.nextInt();
     		if (choix == 1){
-    			Scanner s = new Scanner(new File("FichierProlog.txt"));
-    	        linelist = new ArrayList<Line>();
-    	        while (s.hasNextLine())
-    	        {
-    	            linelist.add( new Line( s.nextLine()));
-    	        }
-    	        s.close();
-    	        for (Line l : linelist){ // pour tout line "l" de listline print l'analyse 
-    	               System.out.println( l.analyse());       // pour ecrire ( kakimasu) 
-    	        }
-    	        
+    			PrologCompiler pc = new PrologCompiler("FichierProlog.txt");
+    			pc.runAutomate();
+                if (pc.hasErr() ){
+                    pc.printErr();
+                }
+                 //pc.lineAnalyse();
+    	         pc.printFaits();
+
     		}else if (choix == 2){
     			 System.out.println("Ecrivez votre commande Prolog :\n");
     			 String lignes = clavier.next();
@@ -38,8 +37,6 @@ public class Main {
     			 for (Line l : linelist){ 
   	             System.out.println( l.analyse()); 
     		}
-    	 
-
     	}
     }
 }}

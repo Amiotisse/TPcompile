@@ -1,10 +1,9 @@
-package dev.tpcompile.l3;
+package dev.tpcompile.l3.lexic;
 
 public enum TokenType {
-	IDENTPREDICAT(": identifiant de prédicat "),
 	CONST(": Constante "),
 	INT(": Entier"), 
-	SEPARATOR(": Séparteur"), 
+	SEPARATOR(": SÃ©parteur"),
 	CONDITION(": condition"),  
 	VAR(": Variable"),
 	IS(" : is "),
@@ -14,6 +13,8 @@ public enum TokenType {
 	MOINS(": operateur -"),
 	MUL(": operateur *"),
 	DIV(": operateur /"),
+
+	//OPERATORS(": operator Alrithmique "),
 	EGALE(": operateur ="),
 	ERREUR("ERREUR");
 	
@@ -29,7 +30,6 @@ public enum TokenType {
 	}
 	
 	public static TokenType defineType (String value){
-		System.out.println(" la valeur est :"+value+"|");
 		if(	value.equals(":-"))
 			return CONDITION;
 		if(value.equals("IS")|| value.equals("is"))
