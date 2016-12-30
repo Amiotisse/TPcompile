@@ -3,16 +3,18 @@ package dev.tpcompile.l3.lexic;
 public enum TokenType {
 	CONST(": Constante "),
 	INT(": Entier"), 
-	SEPARATOR(": Séparteur"),
+	SEPARATOR(": Separteur"),
 	CONDITION(": condition"),  
 	VAR(": Variable"),
 	IS(" : is "),
+	NL(": Saut de line "),
 	READ(" : Lire "),
 	WRITE(": Ecrire "),
-	PLUS(": operateur +"),
+	Op(" : Operateur Aritmetique"),
+	/*PLUS(": operateur +"),
 	MOINS(": operateur -"),
 	MUL(": operateur *"),
-	DIV(": operateur /"),
+	DIV(": operateur /"),*/
 
 	//OPERATORS(": operator Alrithmique "),
 	EGALE(": operateur ="),
@@ -34,18 +36,15 @@ public enum TokenType {
 			return CONDITION;
 		if(value.equals("IS")|| value.equals("is"))
 			return IS;
+		if(value.equals("NL")|| value.equals("nl"))
+			return NL;
 		if(value.equals("READ")|| value.equals("read"))
 			return READ;
 		if(value.equals("WRITE")|| value.equals("write"))
 			return WRITE;
-		if(value.equals("+"))
-			return PLUS;
-		if(value.equals("-"))
-			return MOINS;
-		if(value.equals("*"))
-			return MUL;
-		if(value.equals("/"))
-			return DIV;
+		if(value.matches("[\\+-\\*/]"))
+			return Op;
+		
 		if(value.equals("="))
 			return EGALE;
 		if( value.matches("[\\.,\\()]"))

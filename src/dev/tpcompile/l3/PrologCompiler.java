@@ -58,7 +58,7 @@ public class PrologCompiler {
     public void printFaits(){
         for (Fait fait : faitsList)  {
             if (fait != null) {
-                System.out.println("L'Id de prédicat :" + fait.getName());
+                System.out.println("L'Id de predicat :" + fait.getName());
 
                 for (Token arguments : fait.getArgs())
                     System.out.println("Les Arguments" + fait.getArgs());
