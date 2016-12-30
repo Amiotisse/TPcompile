@@ -42,9 +42,14 @@ public enum TokenType {
 			return READ;
 		if(value.equals("WRITE")|| value.equals("write"))
 			return WRITE;
-		if(value.matches("[\\+-\\*/]"))
+		if(value.equals("+"))
 			return Op;
-		
+		if(value.equals("-"))
+			return Op;
+		if(value.equals("*"))
+			return Op;
+		if(value.equals("/"))
+			return Op;
 		if(value.equals("="))
 			return EGALE;
 		if( value.matches("[\\.,\\()]"))
