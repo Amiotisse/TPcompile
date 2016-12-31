@@ -11,6 +11,7 @@ public enum TokenType {
 	READ(" : Lire "),
 	WRITE(": Ecrire "),
 	Op(" : Operateur Aritmetique"),
+	OpComp(": Operateur de Comparaison "),
 	/*PLUS(": operateur +"),
 	MOINS(": operateur -"),
 	MUL(": operateur *"),
@@ -50,6 +51,8 @@ public enum TokenType {
 			return Op;
 		if(value.equals("/"))
 			return Op;
+		if(value.matches("[< >]"))
+			return OpComp;
 		if(value.equals("="))
 			return EGALE;
 		if( value.matches("[\\.,\\()]"))

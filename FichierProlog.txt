@@ -1,16 +1,6 @@
 % PROGRAMME PROLOG
 plus(1,1,2).
+Plus(1,5,3).
 manger(amir,cerise).
 plus(X,Y) :- plus(X,Z),plus(Z,Y).
-
-Plus(1,5,3).
-PLUS(X,T).
-Y is X-1, fact(Y, Z), F is X*Z).
-pgcd(X,Y,D) :- X < Y, Z IS Y-X, pgcd(X,Z,D).
-pgcd(X,U) :- Z is Y + X.
-
-(id,op,id,op,id).
-adition(5,+,5=10).
-F-> idp (Arg).
-Arg->const E/var E
-E->,const E/,var E/mot vide #
+fact(N,X) :- N > 0,  fact(N-1,X1), X is N*X1.
