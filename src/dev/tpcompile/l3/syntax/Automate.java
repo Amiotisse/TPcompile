@@ -37,6 +37,10 @@ public class Automate {
                         tp = tc;
                         return "2";
                     }
+                    if (tc.getType() == TokenType.CONDITION ){
+                        tp = tc;
+                        return "5";
+                    }
                     messageErr = "token unexpected : expect '(' after" + tp.getValue();
                     return "ERROR";
                 }
