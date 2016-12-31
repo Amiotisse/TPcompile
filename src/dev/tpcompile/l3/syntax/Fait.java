@@ -11,10 +11,14 @@ public class Fait {
     private List<Token> args;
     private boolean conditionExist;
 
+    private List<Expression> expressions;
+    private Expression currentExpr ;
+
     public Fait(String name ) {
         this.name = name;
         this.conditionExist = false;
         args = new ArrayList<Token>();
+        expressions = new ArrayList<Expression>();
     }
 
     public List<Token> getArgs(){
@@ -32,4 +36,6 @@ public class Fait {
     public boolean getconditionExist() {
         return conditionExist;
     }
+
+
 }
