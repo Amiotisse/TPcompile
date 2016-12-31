@@ -7,9 +7,9 @@ public enum TokenType {
 	CONDITION(": condition"),  
 	VAR(": Variable"),
 	IS(" : is "),
-	NL(": Saut de line "),
+	/*NL(": Saut de line "),
 	READ(" : Lire "),
-	WRITE(": Ecrire "),
+	WRITE(": Ecrire "),*/
 	Op(" : Operateur Aritmetique"),
 	OpComp(": Operateur de Comparaison "),
 	/*PLUS(": operateur +"),
@@ -37,12 +37,12 @@ public enum TokenType {
 			return CONDITION;
 		if(value.equals("IS")|| value.equals("is"))
 			return IS;
-		if(value.equals("NL")|| value.equals("nl"))
-			return NL;
-		if(value.equals("READ")|| value.equals("read"))
+		/*if(value.equals("NL")|| value.equals("nl"))
+			return NL;*/
+		/*if(value.equals("READ")|| value.equals("read"))
 			return READ;
 		if(value.equals("WRITE")|| value.equals("write"))
-			return WRITE;
+			return WRITE;*/
 		if(value.equals("+"))
 			return Op;
 		if(value.equals("-"))
@@ -55,7 +55,7 @@ public enum TokenType {
 			return OpComp;
 		if(value.equals("="))
 			return EGALE;
-		if( value.matches("[\\.,\\()]"))
+		if( value.matches("[\\.,\\()\"\"]"))
 			return SEPARATOR ;
 		if( value.matches("[0-9]+"))
 			return INT ;

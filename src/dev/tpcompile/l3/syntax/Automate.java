@@ -27,7 +27,7 @@ public class Automate {
                       tp = tc;
                       return "1";
                     }
-                    messageErr = " doit commancer par un prÃ©dicat";
+                    messageErr = " doit commancer par un prédicat";
                     return "ERROR";
                 }
         );
@@ -88,11 +88,138 @@ public class Automate {
         );
         transitions.put( "5" ,
                 (tc) ->{
-                    messageErr = "not Implemented yet";
-                    //messageErr = "token unexpected : expect ',' or ')' after " +  tp.getValue() ;
+                	if (tc.getType() == TokenType.CONST){
+                		tp = tc ;
+                        return "A1";
+                    }
+                    if (tc.getType() == TokenType.VAR ){
+                    	tp = tc;
+                        return "B1";
+                    }
+                    messageErr = "token unexpected : expect ',' or ')' after " +  tp.getValue() ;
                     return "ERROR";
                 }
         );
+        transitions.put( "A1" ,
+                (tc) ->{
+                    if (tc.getType() == TokenType.SEPARATOR && tc.getValue().equals("(") ){
+                        tp = tc;
+                        return "A2";
+                    }
+                    messageErr = "token unexpected : expect '(' after" + tp.getValue();
+                    return "ERROR";
+                }
+        );
+        
+        transitions.put( "A2" ,
+                (tc) ->{
+                    if ((tc.getType() == TokenType.CONST || tc.getType() == TokenType.VAR || tc.getType() == TokenType.INT) ){
+                        tp = tc;
+                        return "A3";
+                    }
+                    messageErr = "token unexpected : expect '(' after" + tp.getValue();
+                    return "ERROR";
+                }
+        );
+        
+        transitions.put( "A3" ,
+                (tc) ->{
+                    if (tc.getType() == TokenType.SEPARATOR && tc.getValue().equals(",") ){
+                        tp = tc;
+                        return "A2";
+                    }
+                    if (tc.getType() == TokenType.SEPARATOR && tc.getValue().equals(")") ){
+                        tp = tc;
+                        return "A4";
+                    }
+                    messageErr = "token unexpected : expect ',' or ')' after " +  tp.getValue() ;
+                    return "ERROR";
+                }
+        );
+        
+        transitions.put( "A4" ,
+                (tc) ->{
+                    if (tc.getType() == TokenType.SEPARATOR && tc.getValue().equals(".") ){
+                        return "Terminal";
+                    }
+                    if (tc.getType() == TokenType.SEPARATOR && tc.getValue().equals(",")){
+                        tp = tc;
+                        return "5";
+                    }
+                    messageErr = "token unexpected : expect ',' or ')' after " +  tp.getValue() ;
+                    return "ERROR";
+                }
+        );
+        
+        transitions.put( "B1" ,
+                (tc) ->{
+                    if (( tc.getType() == TokenType.IS )){
+                        tp = tc;
+                        return "B2";
+                    }
+                    if (( tc.getType() == TokenType.OpComp )){
+                        tp = tc;
+                        return "C1";
+                    }
+                    messageErr = "token unexpected : expect '(' after" + tp.getValue();
+                    return "ERROR";
+                }
+        );
+        
+        transitions.put( "B2" ,
+                (tc) ->{
+                    if ((tc.getType() == TokenType.VAR || tc.getType() == TokenType.INT) ){
+                        tp = tc;
+                        return "B3";
+                    }
+                    messageErr = "token unexpected : expect '(' after" + tp.getValue();
+                    return "ERROR";
+                }
+        );
+        
+        transitions.put( "B3" ,
+                (tc) ->{
+                    if (tc.getType() == TokenType.SEPARATOR && tc.getValue().equals(",") ){
+                        tp = tc;
+                        return "5";
+                    }
+                    if (tc.getType() == TokenType.Op ){
+                        tp = tc;
+                        return "B2";
+                    }
+                    if (tc.getType() == TokenType.SEPARATOR && tc.getValue().equals(".") ){
+                        return "Terminal";   
+                }
+                    messageErr = "token unexpected : expect ',' or ')' after " +  tp.getValue() ;
+                    return "ERROR";
+                }
+        );
+        
+        transitions.put( "C1" ,
+                (tc) ->{
+                    if ((tc.getType() == TokenType.CONST || tc.getType() == TokenType.VAR || tc.getType() == TokenType.INT) ){
+                        tp = tc;
+                        return "C2";
+                    }
+                    messageErr = "token unexpected : expect '(' after" + tp.getValue();
+                    return "ERROR";
+                }
+        );
+        
+        transitions.put( "C2" ,
+                (tc) ->{
+                    if (tc.getType() == TokenType.SEPARATOR && tc.getValue().equals(".") ){
+                        return "Terminal";
+                    }
+                    if (tc.getType() == TokenType.SEPARATOR && tc.getValue().equals(",")){
+                        tp = tc;
+                        return "5";
+                    }
+                    messageErr = "token unexpected : expect ',' or ')' after " +  tp.getValue() ;
+                    return "ERROR";
+                }
+        );
+        
         transitions.put( "Terminal" ,
                 (tc) ->{
                     messageErr = "token unexpected : expect nothing after " +  tp.getValue() ;
