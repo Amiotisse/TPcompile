@@ -1,6 +1,6 @@
 % PROGRAMME PROLOG
 plus(1,1,2).
-Plus(1,5,3).
+%Plus(1,5,3).
 manger(amir,cerise).
 plus(X,Y) :- plus(X,Z),plus(Z,Y).
 fact(N,X) :- N > 0,  fact(N-1,X1), X is N*X1.

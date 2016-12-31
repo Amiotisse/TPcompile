@@ -26,7 +26,7 @@ public class Main {
                 if (pc.hasErr() ){
                     pc.printErr();
                 }
-                 pc.lineAnalyse();
+                 //pc.lineAnalyse();
     	         pc.printFaits();
 
     		}else if (choix == 2){
