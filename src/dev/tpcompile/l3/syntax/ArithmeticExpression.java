@@ -57,10 +57,10 @@ public class ArithmeticExpression {
     public void addOperand (Token operand ){
         if (fistOperand == null ) fistOperand = operand ;
         else currentSegment.setOperand(operand);
+        if (currentSegment != null) chainedExpression.add(currentSegment);
     }
 
     public void addOperator (String operator){
-        if (currentSegment != null) chainedExpression.add(currentSegment);
         currentSegment = new ArithmeticExpressionSegment();
         currentSegment.setOperator(operator);
     }

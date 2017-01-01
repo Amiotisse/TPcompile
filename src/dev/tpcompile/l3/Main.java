@@ -15,9 +15,9 @@ public class Main {
     private static List<Line> linelist;
     
     public static void main(String[] args) throws FileNotFoundException {
-    	int choix = 3; int choix1 = 3;
+    	int choix = 2; int choix1 = 3;
     	while (choix!=0 ){
-    		System.out.println("Voulez vous : \n 1) Choisir un fichier \n 2) Ecrir un fichier \n 0) Sortir \n ");
+    		System.out.println("Voulez vous : \n 1) Choisir un fichier \n 0) Sortir \n ");
     		Scanner clavier = new Scanner (System.in);
     		choix = clavier.nextInt();
     		
@@ -40,7 +40,8 @@ public class Main {
     	         pc.printFaits();
                 }
 
-    		}else if (choix == 2){
+    		}
+    		/*else if (choix == 2){
     			 System.out.println("Ecrivez votre commande Prolog :\n");
     			 String lignes = clavier.next();
     			 linelist = new ArrayList<Line>();
@@ -48,6 +49,6 @@ public class Main {
     			 for (Line l : linelist){ 
   	             System.out.println( l.analyse()); 
     		}
-    	}
+    	}*/
     }
 }}

@@ -24,9 +24,9 @@ public class Definition implements Expression{
 
     @Override
     public String toString() {
-        return "Definition{" +
-                "varDefined='" + varDefined + '\'' +
-                ", definition=" + definition +
+        return "Definition { " +
+                "Variable Defined = '" + varDefined + '\'' +
+                ", definition = " + definition +
                 '}';
     }
 }

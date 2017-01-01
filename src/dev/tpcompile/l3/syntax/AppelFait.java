@@ -22,9 +22,9 @@ public class AppelFait implements Expression{
         for ( Token arg : args){
             argsAsStr += arg + "" ;
         }
-        return "AppelFait{" +
-                "name='" + name + '\'' +
-                ", args=" + argsAsStr +
+        return "Appel Fait { " +
+                "name = '" + name + '\'' +
+                ", args = " + argsAsStr +
                 '}';
     }
 

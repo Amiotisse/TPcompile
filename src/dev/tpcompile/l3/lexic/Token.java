@@ -15,7 +15,7 @@ public class Token {
 	}
 
 	public void setType(TokenType type) {
-		this.type = type;
+		this.type = type ;
 	}
 
 	public String getValue() {
@@ -31,7 +31,7 @@ public class Token {
 		this.type= TokenType.defineType(value);// le type de token et de sa valeur 
 	}
 	public String toString() {
-		return value + " : "+ type;
+		return value + " : "+ type +" ";
 	}
 
 //	public boolean isIdentPredicat() {

@@ -28,7 +28,7 @@ public class Automate {
                       tp = tc;
                       return "1";
                     }
-                    messageErr = " doit commancer par un prédicat";
+                    messageErr = " token unexpected : expect 'Identifiant' first";
                     return "ERROR";
                 }
         );
@@ -49,7 +49,7 @@ public class Automate {
                         tp = tc;
                         return "3";
                     }
-                    messageErr = "token unexpected : expect ident  after " + tp.getValue();
+                    messageErr = "token unexpected : expect 'const' or 'var' or 'int' after " + tp.getValue();
                     return "ERROR";
                 }
         );
@@ -79,7 +79,7 @@ public class Automate {
                         tp = tc;
                         return "5";
                     }
-                    messageErr = "token unexpected : expect ',' or ')' after " +  tp.getValue() ;
+                    messageErr = "token unexpected : expect '.' or condition ' :- ' after " +  tp.getValue() ;
                     return "ERROR";
                 }
         );
@@ -98,7 +98,7 @@ public class Automate {
                         tp = tc;
                         return "C1";
                     }
-                    messageErr = "token unexpected : expect ',' or ')' after " +  tp.getValue() ;
+                    messageErr = "token unexpected : expect 'ident' or 'var' after " +  tp.getValue() ;
                     return "ERROR";
                 }
         );
@@ -120,7 +120,7 @@ public class Automate {
                         ((AppelFait)currentExpr).getArgs().add(tc);
                         return "A3";
                     }
-                    messageErr = "token unexpected : expect '(' after" + tp.getValue();
+                    messageErr = "token unexpected : expect 'const' or 'var' or 'int' after" + tp.getValue();
                     return "ERROR";
                 }
         );
@@ -151,7 +151,7 @@ public class Automate {
                         tp = tc;
                         return "5";
                     }
-                    messageErr = "token unexpected : expect ',' or ')' after " +  tp.getValue() ;
+                    messageErr = "token unexpected : expect ',' or '.' after " +  tp.getValue() ;
                     return "ERROR";
                 }
         );
@@ -165,13 +165,13 @@ public class Automate {
                         return "B2";
                     }
                     if (( tc.getType() == TokenType.OpComp )){
-                        currentExpr = new Comparetion();
-                        ((Comparetion)currentExpr).setLeft(tp);
-                        ((Comparetion)currentExpr).setOperator(tc.getValue());
+                        currentExpr = new Comparaison();
+                        ((Comparaison)currentExpr).setLeft(tp);
+                        ((Comparaison)currentExpr).setOperator(tc.getValue());
                         tp = tc;
                         return "C2";
                     }
-                    messageErr = "token unexpected : expect '(' after" + tp.getValue();
+                    messageErr = "token unexpected : expect keyword 'is' or operation compare after" + tp.getValue();
                     return "ERROR";
                 }
         );
@@ -183,7 +183,7 @@ public class Automate {
                         tp = tc;
                         return "B3";
                     }
-                    messageErr = "token unexpected : expect '(' after" + tp.getValue();
+                    messageErr = "token unexpected : expect 'var' or 'int' after" + tp.getValue();
                     return "ERROR";
                 }
         );
@@ -204,7 +204,7 @@ public class Automate {
                         result.getExpressions().add(currentExpr);
                         return "Terminal";   
                 }
-                    messageErr = "token unexpected : expect ',' or ')' after " +  tp.getValue() ;
+                    messageErr = "token unexpected : expect ',' or 'Arithmitic operator' or '.' after " +  tp.getValue() ;
                     return "ERROR";
                 }
         );
@@ -212,13 +212,13 @@ public class Automate {
         transitions.put( "C1" ,
                 (tc) ->{
                     if (( tc.getType() == TokenType.OpComp )){
-                        currentExpr = new Comparetion();
-                        ((Comparetion)currentExpr).setLeft(tp);
-                        ((Comparetion)currentExpr).setOperator(tc.getValue());
+                        currentExpr = new Comparaison();
+                        ((Comparaison)currentExpr).setLeft(tp);
+                        ((Comparaison)currentExpr).setOperator(tc.getValue());
                         tp = tc;
                         return "C2";
                     }
-                    messageErr = "token unexpected : expect '(' after" + tp.getValue();
+                    messageErr = "token unexpected : expect 'opertor compare' after" + tp.getValue();
                     return "ERROR";
                 }
         );
@@ -226,11 +226,11 @@ public class Automate {
         transitions.put( "C2" ,
                 (tc) ->{
                     if ((tc.getType() == TokenType.CONST || tc.getType() == TokenType.VAR || tc.getType() == TokenType.INT) ){
-                        ((Comparetion)currentExpr).setRight(tc);
+                        ((Comparaison)currentExpr).setRight(tc);
                         tp = tc;
                         return "C3";
                     }
-                    messageErr = "token unexpected : expect '(' after" + tp.getValue();
+                    messageErr = "token unexpected : expect 'const' or 'var' or 'int' after" + tp.getValue();
                     return "ERROR";
                 }
         );
@@ -246,7 +246,7 @@ public class Automate {
                         tp = tc;
                         return "5";
                     }
-                    messageErr = "token unexpected : expect ',' or ')' after " +  tp.getValue() ;
+                    messageErr = "token unexpected : expect ',' or '.' after " +  tp.getValue() ;
                     return "ERROR";
                 }
         );
