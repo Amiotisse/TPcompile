@@ -1,24 +1,22 @@
 package dev.tpcompile.l3.lexic;
 
 public enum TokenType {
-	CONST(": Constante "),
-	INT(": Entier"), 
-	SEPARATOR(": Separteur"),
-	CONDITION(": condition"),  
-	VAR(": Variable"),
-	IS(" : is "),
+	CONST(" Constante "),
+	INT(" Entier"), 
+	SEPARATOR(" Separteur"),
+	CONDITION(" condition"),  
+	VAR(" Variable"),
+	IS("  is "),
 	/*NL(": Saut de line "),
 	READ(" : Lire "),
 	WRITE(": Ecrire "),*/
-	Op(" : Operateur Aritmetique"),
-	OpComp(": Operateur de Comparaison "),
+	Op("  Operateur Aritmetique"),
+	OpComp(" Operateur de Comparaison "),
 	/*PLUS(": operateur +"),
 	MOINS(": operateur -"),
 	MUL(": operateur *"),
 	DIV(": operateur /"),*/
-
-	//OPERATORS(": operator Alrithmique "),
-	EGALE(": operateur ="),
+	EGALE(" operateur ="),
 	ERREUR("ERREUR");
 	
 	private String discription;

@@ -15,19 +15,30 @@ public class Main {
     private static List<Line> linelist;
     
     public static void main(String[] args) throws FileNotFoundException {
-    	int choix = 3;
+    	int choix = 3; int choix1 = 3;
     	while (choix!=0 ){
     		System.out.println("Voulez vous : \n 1) Choisir un fichier \n 2) Ecrir un fichier \n 0) Sortir \n ");
     		Scanner clavier = new Scanner (System.in);
     		choix = clavier.nextInt();
+    		
     		if (choix == 1){
+    			if (choix1!=0) {
+    				System.out.println("Que voulez vous faire : \n 1) L'Analyse Lexical \n 2) L'Analyse Syntaxique \n 0) Revenir ");
+    				Scanner clavier1 = new Scanner (System.in);
+    	    		choix1 = clavier1.nextInt();
+    			}
+    			
     			PrologCompiler pc = new PrologCompiler("FichierProlog.txt");
     			pc.runAutomate();
                 if (pc.hasErr() ){
                     pc.printErr();
                 }
-                 //pc.lineAnalyse();
+                if (choix1 == 1){
+                 pc.lineAnalyse();
+                }
+                else if (choix1 == 2){
     	         pc.printFaits();
+                }
 
     		}else if (choix == 2){
     			 System.out.println("Ecrivez votre commande Prolog :\n");
