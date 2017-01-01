@@ -2,6 +2,7 @@ package dev.tpcompile.l3.syntax;
 
 import dev.tpcompile.l3.lexic.Token;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArithmeticExpression {
@@ -33,7 +34,7 @@ public class ArithmeticExpression {
     }
 
     private Token fistOperand = null;
-    private List<ArithmeticExpressionSegment> chainedExpression;
+    private List<ArithmeticExpressionSegment> chainedExpression = new ArrayList<ArithmeticExpressionSegment>();
 
     public Token getFistOperand() {
         return fistOperand;

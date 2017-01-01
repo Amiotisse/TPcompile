@@ -12,7 +12,7 @@ public class Fait {
     private boolean conditionExist;
 
     private List<Expression> expressions;
-    private Expression currentExpr ;
+
 
     public Fait(String name ) {
         this.name = name;
@@ -37,5 +37,7 @@ public class Fait {
         return conditionExist;
     }
 
-
+    public List<Expression> getExpressions() {
+        return expressions;
+    }
 }

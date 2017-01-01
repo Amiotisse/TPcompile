@@ -64,6 +64,8 @@ public class PrologCompiler {
                     System.out.println("Les Arguments" + fait.getArgs());
 
                 System.out.println("Les Conditions  :" + fait.getconditionExist());
+
+                System.out.println("le Exprs :" + fait.getExpressions());
             }
         }
     }

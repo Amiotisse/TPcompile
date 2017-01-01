@@ -4,7 +4,7 @@ public class Definition implements Expression{
 
     private String varDefined ;
 
-    private ArithmeticExpression definition;
+    private ArithmeticExpression definition = new ArithmeticExpression();
 
     public String getVarDefined() {
         return varDefined;

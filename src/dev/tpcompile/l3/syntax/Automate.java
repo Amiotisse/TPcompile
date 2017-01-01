@@ -14,6 +14,7 @@ public class Automate {
     private Map<String, Function<Token,String>> transitions ;
     private String messageErr;
     private Token tp;
+    private Expression currentExpr ;
 
 
     public Automate(){
@@ -90,11 +91,16 @@ public class Automate {
                 (tc) ->{
                 	if (tc.getType() == TokenType.CONST){
                 		tp = tc ;
+                        currentExpr = new AppelFait(tc.getValue());
                         return "A1";
                     }
                     if (tc.getType() == TokenType.VAR ){
                     	tp = tc;
                         return "B1";
+                    }
+                    if (tc.getType() == TokenType.INT || tc.getType() == TokenType.CONST ){
+                        tp = tc;
+                        return "C1";
                     }
                     messageErr = "token unexpected : expect ',' or ')' after " +  tp.getValue() ;
                     return "ERROR";
@@ -115,6 +121,7 @@ public class Automate {
                 (tc) ->{
                     if ((tc.getType() == TokenType.CONST || tc.getType() == TokenType.VAR || tc.getType() == TokenType.INT) ){
                         tp = tc;
+                        ((AppelFait)currentExpr).getArgs().add(tc);
                         return "A3";
                     }
                     messageErr = "token unexpected : expect '(' after" + tp.getValue();
@@ -140,9 +147,11 @@ public class Automate {
         transitions.put( "A4" ,
                 (tc) ->{
                     if (tc.getType() == TokenType.SEPARATOR && tc.getValue().equals(".") ){
+                        result.getExpressions().add(currentExpr);
                         return "Terminal";
                     }
                     if (tc.getType() == TokenType.SEPARATOR && tc.getValue().equals(",")){
+                        result.getExpressions().add(currentExpr);
                         tp = tc;
                         return "5";
                     }
@@ -154,12 +163,17 @@ public class Automate {
         transitions.put( "B1" ,
                 (tc) ->{
                     if (( tc.getType() == TokenType.IS )){
+                        currentExpr = new Definition();
+                        ((Definition)currentExpr).setVarDefined(tp.getValue());
                         tp = tc;
                         return "B2";
                     }
                     if (( tc.getType() == TokenType.OpComp )){
+                        currentExpr = new Comparetion();
+                        ((Comparetion)currentExpr).setLeft(tp);
+                        ((Comparetion)currentExpr).setOperator(tc.getValue());
                         tp = tc;
-                        return "C1";
+                        return "C2";
                     }
                     messageErr = "token unexpected : expect '(' after" + tp.getValue();
                     return "ERROR";
@@ -169,6 +183,7 @@ public class Automate {
         transitions.put( "B2" ,
                 (tc) ->{
                     if ((tc.getType() == TokenType.VAR || tc.getType() == TokenType.INT) ){
+                        ((Definition)currentExpr).getDefinition().addOperand(tc);
                         tp = tc;
                         return "B3";
                     }
@@ -180,24 +195,30 @@ public class Automate {
         transitions.put( "B3" ,
                 (tc) ->{
                     if (tc.getType() == TokenType.SEPARATOR && tc.getValue().equals(",") ){
+                        result.getExpressions().add(currentExpr);
                         tp = tc;
                         return "5";
                     }
                     if (tc.getType() == TokenType.Op ){
+                        ((Definition)currentExpr).getDefinition().addOperator(tc.getValue());
                         tp = tc;
                         return "B2";
                     }
                     if (tc.getType() == TokenType.SEPARATOR && tc.getValue().equals(".") ){
+                        result.getExpressions().add(currentExpr);
                         return "Terminal";   
                 }
                     messageErr = "token unexpected : expect ',' or ')' after " +  tp.getValue() ;
                     return "ERROR";
                 }
         );
-        
+
         transitions.put( "C1" ,
                 (tc) ->{
-                    if ((tc.getType() == TokenType.CONST || tc.getType() == TokenType.VAR || tc.getType() == TokenType.INT) ){
+                    if (( tc.getType() == TokenType.OpComp )){
+                        currentExpr = new Comparetion();
+                        ((Comparetion)currentExpr).setLeft(tp);
+                        ((Comparetion)currentExpr).setOperator(tc.getValue());
                         tp = tc;
                         return "C2";
                     }
@@ -205,13 +226,27 @@ public class Automate {
                     return "ERROR";
                 }
         );
-        
+
         transitions.put( "C2" ,
                 (tc) ->{
+                    if ((tc.getType() == TokenType.CONST || tc.getType() == TokenType.VAR || tc.getType() == TokenType.INT) ){
+                        ((Comparetion)currentExpr).setRight(tc);
+                        tp = tc;
+                        return "C3";
+                    }
+                    messageErr = "token unexpected : expect '(' after" + tp.getValue();
+                    return "ERROR";
+                }
+        );
+        
+        transitions.put( "C3" ,
+                (tc) ->{
                     if (tc.getType() == TokenType.SEPARATOR && tc.getValue().equals(".") ){
+                        result.getExpressions().add(currentExpr);
                         return "Terminal";
                     }
                     if (tc.getType() == TokenType.SEPARATOR && tc.getValue().equals(",")){
+                        result.getExpressions().add(currentExpr);
                         tp = tc;
                         return "5";
                     }
