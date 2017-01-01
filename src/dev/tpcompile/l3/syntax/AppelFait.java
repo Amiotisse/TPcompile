@@ -15,9 +15,13 @@ public class AppelFait implements Expression{
 
     @Override
     public String toString() {
+        String argsAsStr = "" ;
+        for ( Token arg : args){
+            argsAsStr += arg + "" ;
+        }
         return "AppelFait{" +
                 "name='" + name + '\'' +
-                ", args=" + args +
+                ", args=" + argsAsStr +
                 '}';
     }
 
